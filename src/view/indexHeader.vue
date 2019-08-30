@@ -100,8 +100,8 @@
 						</el-tooltip>
 					</div>
 					<div style="margin-left: 10px">
-						<!--<a href="https://51gsc.com/app/JJS0"><i class="fa fa-download" aria-hidden="true"></i></a>-->
-						<a href="https://51gsc.com/app/JJS0">{{$t('header.down')}}</a>
+						<!--<a href="https://51gsc.com/app/MLid"><i class="fa fa-download" aria-hidden="true"></i></a>-->
+						<a href="https://51gsc.com/app/MLid">{{$t('header.down')}}</a>
 					</div>
 				</div>
 				<!--				登录之后-->
@@ -226,8 +226,8 @@
 					</div>
 					<!--					下载-->
 					<div style="margin-left: 20px">
-						<!--<a href="https://51gsc.com/app/JJS0"><i class="fa fa-download" aria-hidden="true"></i></a>-->
-						<a href="https://51gsc.com/app/JJS0">App 下载</a>
+						<!--<a href="https://51gsc.com/app/MLid"><i class="fa fa-download" aria-hidden="true"></i></a>-->
+						<a href="https://51gsc.com/app/MLid">App 下载</a>
 					</div>
 
 				</div>

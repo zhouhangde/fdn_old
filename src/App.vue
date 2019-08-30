@@ -122,7 +122,7 @@
 			},
 			//下载
 			upload(){
-               window.location.href = 'https://51gsc.com/app/JJS0'
+               window.location.href = 'https://51gsc.com/app/MLid'
 			},
 			checkPt(){
 				let sUserAgent = navigator.userAgent.toLowerCase();
