@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="26px" viewBox="0 0 20 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>路径 10</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#9AE1FF" offset="0%"></stop>
+            <stop stop-color="#0052FE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(-673.000000, -548.000000)" fill="url(#linearGradient-1)">
+            <g id="编组-42" transform="translate(672.000000, 547.000000)">
+                <g id="编组-43" transform="translate(0.000000, 0.189483)">
+                    <polygon id="路径-10" transform="translate(11.033320, 13.865790) rotate(-10.000000) translate(-11.033320, -13.865790) " points="16.0076539 1.98981398 11.236568 10.698669 20.1427918 15.5997337 6.74241067 25.7417669 10.7585774 16.9913233 1.92384833 12.3872424"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

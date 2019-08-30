@@ -1,0 +1,93 @@
+.brcolor {
+  border-right: 1px dashed #2f3440;
+}
+.noticeDetail {
+  background: #131a21;
+}
+body .trade .bg-main {
+  background: #171b2b !important;
+}
+body .main-bg {
+  background: #252a44 !important;
+}
+body .part-bg {
+  background: #171b2b !important;
+}
+body .trade-wrap .bdr-part {
+  border-color: #606585 !important;
+}
+body .market .bdr-part {
+  border-color: #606585 !important;
+}
+body .market .active {
+  color: #eee!important;
+}
+body .white_active {
+  color: #fff!important;
+}
+body .blue_clr {
+  color: #A8ADCC!important;
+}
+body .bg-even {
+  background: #131625 !important;
+}
+body .top_bg {
+  background: #131625 !important;
+}
+body .handicap {
+  background: #131625 !important;
+}
+body .bg-hov:hover,
+body .bg-sel {
+  background: #2a2d3b !important;
+}
+body .layerBg {
+  background: #fff !important;
+}
+body .hand_active {
+  background: #171b2b!important;
+  color: #eee!important;
+}
+body .tv_wrap {
+  border-bottom: 3px solid #131625!important;
+}
+body .bdb_blue {
+  border-bottom: 2px solid  #131625!important;
+}
+body .tabtitle .active {
+  border-bottom: 2px solid #7388ff;
+}
+body .available {
+  border-bottom: 1px solid #7388ff;
+}
+body .titles {
+  background: #131625!important;
+  color: #A8ADCC!important;
+}
+body .blue_content {
+  background: #171b2b !important;
+}
+body .market .el-input__inner {
+  background-color: #171b2b!important;
+  border: 1px solid #535793!important;
+  color: #eee!important;
+}
+body .c_symbol {
+  color: #fff!important;
+}
+body .tabtitle .active {
+  color: #7388ff!important;
+}
+body .el-slider__runway {
+  background: #2d374b!important;
+}
+body .buy_list,
+body .his_list {
+  color: #a8adcc!important;
+}
+body .buy_list:nth-child(odd) {
+  background: #131625 !important;
+}
+body .his_list:nth-child(odd) {
+  background: #131625 !important;
+}
