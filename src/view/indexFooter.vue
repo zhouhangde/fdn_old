@@ -1,7 +1,7 @@
 <template>
 
   <div id="index-footer" class="foot flex center around" style="padding:50px 80px;">
-  
+
     <ul class="ft12 foot_ul gray_a">
       <div>
         <li class="mb15 ft16 white">{{$t('footer.about')}}</li>
@@ -44,7 +44,7 @@
           <!-- 新手帮助 -->
           <router-link :to="{path:'/newHelp'}" tag="span">{{$t('footer.nhelp')}}</router-link>
         </li>
-        <!-- <li class="mb15"> 
+        <!-- <li class="mb15">
           <router-link
             :to="{path:'/help',query:{id:3}}"
             tag="span"
@@ -81,11 +81,11 @@
 			<a target="_blank" href="http://va.mikecrm.com/yPOgcOl">{{$t('footer.apply')}} </a>
         </li>
         <li class="mb15" >
-            {{$t('footer.email')}}:business@hxex.com
+            {{$t('footer.email')}}:fdnservice3@gmail.com
         </li>
-		  <li class="mb15" >
-			  {{$t('footer.support')}}:support@hxex.com
-		  </li>
+		  <!--<li class="mb15" >-->
+			  <!--{{$t('footer.support')}}:fdnservice3@gmail.com-->
+		  <!--</li>-->
       </div>
     </ul>
     <img src="../assets/images/liner-border.png">
@@ -97,9 +97,12 @@
             class="flex alcenter"
             @mouseover="wxImg_over(i)"
             @mouseout="wxImg_out(i)"
-          ><img :src="item.ico" class="ico" style="width:25px;"><span class="ml5">{{item.name}}</span></span>
+          >
+			  <img :src="item.ico" class="ico" style="width:25px;">
+			  <span class="ml5">{{item.name}}</span>
+		  </span>
           <div class="absolute " v-show="item.wxImg" style="top:20%;left:70%;">
-            <img style="width:100px;height:100ox;" :src="item.url">
+            <img style="width:100px;height:100px;" :src="item.url">
           </div>
         </li>
         <li class="mb15" v-for="(itm,index) in link">
@@ -107,14 +110,17 @@
             :href="itm.url"
             target="_blank"
             class="flex alcenter"
-          ><img  class="ico" :src="itm.ico" style="width:25px;"><span class="ml5">{{itm.name}}</span></a>
+          >
+			  <img  class="ico" :src="itm.ico">
+			  <span class="ml5" style="margin-left: 0px;">{{itm.name}}</span>
+		  </a>
         </li>
         <!-- <li class="mb15">
           <a
-            
+
             target="_blank"
             class="flex alcenter"
-            
+
           ><img src="../assets/images/sina_icon.png"><span class="ml5">微博</span></a>
         </li>
         <li class="mb15">
@@ -131,7 +137,7 @@
         </li>
         <li class="mb15">
           <a
-            
+
             target="_blank"
              class="flex alcenter"
           ><img src="../assets/images/twitter.png"><span class="ml5">Twitter</span></a>
@@ -174,16 +180,16 @@ export default {
                   that.$set(item,'wxImg',false)
                 })
                 this.link = res.data.message.link;
-            }            
+            }
           }
       })
     },
-    wxImg_over(i){    
-           this.img_link[i].wxImg = true;         
-       
+    wxImg_over(i){
+           this.img_link[i].wxImg = true;
+
     },
     wxImg_out(i){
-          this.img_link[i].wxImg = false;     
+          this.img_link[i].wxImg = false;
     }
   }
 };
