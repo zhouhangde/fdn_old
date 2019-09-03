@@ -160,7 +160,7 @@
 				})
                
 			},
-			//卖出
+			//买入
 			goBuy(){
 			   var $this =this
 			   if($this.theBuyData=='none'){
