@@ -71,40 +71,40 @@
           <input type="file" id="file2" accept="image/*" name="file3" @change="file2">
         </div>
       </div>
-      <div class="ptb10 w50 margin">
-        <p class="mb10 ft14 flex alcenter">
-          <span class="spot inblock"></span>
-          <span class="ml5">上传手持证件照</span>
-        </p>
-        <p class="mb10 ft12">仅支持jpg、png、不超过4mb</p>
-        <div class="flex alcenter hand_box mt20">
-          <img :src="src3" width="234" height="170">
-          <div class="ml10">
-            <p
-              class="ft12 line-h2 mb10"
-            >请提供一张您手持证件照的照片，在同张照片中也要包含有“TREX”、日期和您的签名的注释。请确保您的脸部清晰可见，且所有证件详细信息都清楚可读</p>
-            <div class="flex">
-              <div>
-                <p class="ft12 mb5 flex alcenter s_ico">
-                  <img src="../assets/images/success.png">面部清晰可见无遮挡
-                </p>
-                <p class="ft12 mb5 flex alcenter s_ico">
-                  <img src="../assets/images/success.png">照片清晰可见
-                </p>
-                <p class="ft12 flex alcenter s_ico">
-                  <img src="../assets/images/success.png">带有[TREX]的文字注释
-                </p>
-              </div>
-              <div class="flex" style="align-items:flex-end;">
-                <div class="positionR ml20">
-                  <p class="txt_blue upload ft12 tc">上传手持身份证件照</p>
-                  <input type="file" id="file3" accept="image/*" name="file3" @change="file3">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!--<div class="ptb10 w50 margin">-->
+        <!--<p class="mb10 ft14 flex alcenter">-->
+          <!--<span class="spot inblock"></span>-->
+          <!--<span class="ml5">上传手持证件照</span>-->
+        <!--</p>-->
+        <!--<p class="mb10 ft12">仅支持jpg、png、不超过4mb</p>-->
+        <!--<div class="flex alcenter hand_box mt20">-->
+          <!--<img :src="src3" width="234" height="170">-->
+          <!--<div class="ml10">-->
+            <!--<p-->
+              <!--class="ft12 line-h2 mb10"-->
+            <!--&gt;请提供一张您手持证件照的照片，在同张照片中也要包含有“TREX”、日期和您的签名的注释。请确保您的脸部清晰可见，且所有证件详细信息都清楚可读</p>-->
+            <!--<div class="flex">-->
+              <!--<div>-->
+                <!--<p class="ft12 mb5 flex alcenter s_ico">-->
+                  <!--<img src="../assets/images/success.png">面部清晰可见无遮挡-->
+                <!--</p>-->
+                <!--<p class="ft12 mb5 flex alcenter s_ico">-->
+                  <!--<img src="../assets/images/success.png">照片清晰可见-->
+                <!--</p>-->
+                <!--<p class="ft12 flex alcenter s_ico">-->
+                  <!--<img src="../assets/images/success.png">带有[TREX]的文字注释-->
+                <!--</p>-->
+              <!--</div>-->
+              <!--<div class="flex" style="align-items:flex-end;">-->
+                <!--<div class="positionR ml20">-->
+                  <!--<p class="txt_blue upload ft12 tc">上传手持身份证件照</p>-->
+                  <!--<input type="file" id="file3" accept="image/*" name="file3" @change="file3">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
       <p class="submit01 tc blue_bg mt10 w20 next" @click="submit2">提交</p>
     </div>
     <div class="mt50" v-if="lever == 4">
@@ -336,7 +336,7 @@ export default {
         return;
       }
       if(this.ismonth(this.real_name)){
-        layer.msg("姓名中不能含有数字"); 
+        layer.msg("姓名中不能含有数字");
         return;
       }
       var i = layer.load();

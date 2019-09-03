@@ -73,40 +73,41 @@
           <input type="file" id="file2" accept="image/*" name="file3" @change="file2">
         </div>
       </div>
-      <div class="ptb10 w50 margin">
-        <p class="mb10 ft14 flex alcenter">
-          <span class="spot inblock"></span>
-          <span class="ml5">{{$t('auth2.hand')}}</span>
-        </p>
-        <p class="mb10 ft12">{{$t('auth2.mb')}}</p>
-        <div class="flex alcenter hand_box mt20">
-          <img :src="src3" width="234" height="170">
-          <div class="ml10">
-            <p
-              class="ft12 line-h2 mb10"
-            >{{$t('auth2.tip2')}}</p>
-            <div class="flex">
-              <div>
-                <p class="ft12 mb5 flex alcenter s_ico">
-                  <img src="../assets/images/success.png">{{$t('auth2.face')}}
-                </p>
-                <p class="ft12 mb5 flex alcenter s_ico">
-                  <img src="../assets/images/success.png">{{$t('auth2.clearly')}}
-                </p>
-                <p class="ft12 flex alcenter s_ico">
-                  <img src="../assets/images/success.png">{{$t('auth2.notes')}}
-                </p>
-              </div>
-              <div class="flex" style="align-items:flex-end;">
-                <div class="positionR ml20">
-                  <p class="txt_blue upload ft12 tc">{{$t('auth2.hand')}}</p>
-                  <input type="file" id="file3" accept="image/*" name="file3" @change="file3">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!--<div class="ptb10 w50 margin">-->
+        <!--<p class="mb10 ft14 flex alcenter">-->
+          <!--<span class="spot inblock"></span>-->
+          <!--<span class="ml5">{{$t('auth2.hand')}}</span>-->
+        <!--</p>-->
+        <!--<p class="mb10 ft12">{{$t('auth2.mb')}}</p>-->
+        <!--<div class="flex alcenter hand_box mt20">-->
+          <!--<img :src="src3" width="234" height="170">-->
+          <!--<div class="ml10">-->
+            <!--<p-->
+              <!--class="ft12 line-h2 mb10"-->
+            <!--&gt;{{$t('auth2.tip2')}}</p>-->
+            <!--<div class="flex">-->
+              <!--<div>-->
+                <!--<p class="ft12 mb5 flex alcenter s_ico">-->
+                  <!--<img src="../assets/images/success.png">{{$t('auth2.face')}}-->
+                <!--</p>-->
+                <!--<p class="ft12 mb5 flex alcenter s_ico">-->
+                  <!--<img src="../assets/images/success.png">{{$t('auth2.clearly')}}-->
+                <!--</p>-->
+                <!--<p class="ft12 flex alcenter s_ico">-->
+                  <!--<img src="../assets/images/success.png">{{$t('auth2.notes')}}-->
+                <!--</p>-->
+              <!--</div>-->
+              <!--<div class="flex" style="align-items:flex-end;">-->
+                <!--<div class="positionR ml20">-->
+                  <!--<p class="txt_blue upload ft12 tc">{{$t('auth2.hand')}}</p>-->
+                  <!--<input type="file" id="file3" accept="image/*" name="file3" @change="file3">-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
       <p class="submit01 tc blue_bg mt10 w20 next" @click="submit2">{{$t('auth.up')}}</p>
     </div>
     <div class="mt50" v-if="lever == 4">
@@ -348,7 +349,7 @@ export default {
         return;
       }
       if(this.ismonth(this.real_name)){
-        layer.msg(this.$t('auth2.noNumber')); 
+        layer.msg(this.$t('auth2.noNumber'));
         return;
       }
       var i = layer.load();
@@ -491,17 +492,17 @@ export default {
         layer.msg(this.$t('auth2.reverseImg'));
         return;
       }
-      if (this.src03 == "") {
-        layer.msg(this.$t('auth2.handImg'));
-        return;
-      }
+      // if (this.src03 == "") {
+      //   layer.msg(this.$t('auth2.handImg'));
+      //   return;
+      // }
       var i = layer.load();
       this.$http({
         url: "/api/user/real",
         data: {
           front_pic: this.src1,
           reverse_pic: this.src2,
-          hand_pic: this.src3
+          // hand_pic: this.src3 // hand_pic: this.src3
         },
         headers: { Authorization: this.token },
         method: "post"
