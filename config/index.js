@@ -13,12 +13,31 @@ module.exports = {
     // proxyTable: {},
     proxyTable: {
       '/api': {
-          target: 'https://www.bitfdn.com/api',//后端接口地址
+          // target: 'https://www.bitfdn.com/api',//后端接口地址
+          target: 'http://47.90.19.197:8080/api',//后端接口地址
           // target: 'https://www.hxex.com/api',//后端接口地址
           changeOrigin: true,//是否允许跨越
           pathRewrite: {
               '^/api': '/',//重写,
           }
+      },
+      '/payment': {
+        target: 'https://zf.flyotcpay.com/payment',//后端接口地址
+        // target: 'https://www.hxex.com/api',//后端接口地址
+        changeOrigin: true,//是否允许跨越
+        "secure": true,//false为http访问，true为https访问
+        pathRewrite: {
+            '^/payment': '/',//重写,
+        }
+      },
+      '/gototranfer': {
+        target: 'http://3tpju3dmcn.52http.tech/gototranfer',//后端接口地址
+        // target: 'https://www.hxex.com/api',//后端接口地址
+        changeOrigin: true,//是否允许跨越
+        "secure": true,//false为http访问，true为https访问
+        pathRewrite: {
+            '^/gototranfer': '/',//重写,
+        }
       },
       '/json_svr': {
         target: 'https://gateio.news/json_svr',//后端接口地址
@@ -69,7 +88,7 @@ module.exports = {
 
   },
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.0.136', // can be overwritten by process.env.HOST
     port: 8012, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

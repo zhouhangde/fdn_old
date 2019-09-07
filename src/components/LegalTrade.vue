@@ -74,6 +74,51 @@
 				   </div>
 			   </div>
 
+			   <!-- <form name="personalPay" method="post" action="https://zf.pexotc.com/payment/" style="display: flex;flex-direction: column;padding: 30px;"> 
+					<div>
+                        <lable>商户id:</lable>
+					    <input name="merchantid" value="CGMKBQ"/>
+					</div>
+					<div>
+                        <lable>业务订单号:</lable>
+					    <input name="orderno" value="4409"/>
+					</div>
+					<div>
+                        <lable>支付金额:</lable>
+					    <input name="orderamount" value="2000"/>
+					</div>
+					<div>
+                        <lable>支付方式:</lable>
+					    <input name="paytype" value="bank"/>
+					</div>
+					<div>
+                        <lable>支付人姓名:</lable>
+					    <input name="customername"  value="123441234"/>
+					</div>
+					<div>
+                        <lable>支付币种:</lable>
+					    <input name="ordercurrency" value="USDT"/>
+					</div>
+					<div>
+                        <lable>回调地址:</lable>
+					    <input name="serverbackurl"  value="http://3tpju3dmcn.52http.tech/serverback" style="width: 500px;"/>
+					</div>
+					<div>
+                        <lable>跳转地址:</lable>
+					    <input name="callbackurl" value="https://www.bitfdn.com/#/components/payCannel?id=4407&type=buy" style="width: 500px;"/>
+					</div>
+					<div>
+                        <lable>签名加密:</lable>
+					    <input name="signType"  value="md5" />
+					</div>
+					<div>
+                        <lable>加密签名:</lable>
+					    <input name="sign"  value="67194b29572e8e13f93699b6a253121a" style="width: 500px;"/>
+					</div>
+					<input type="submit" value="提交"/>
+				</form> -->
+
+
 
 
 
@@ -175,7 +220,7 @@
 				let params = {
 					id: $this.theBuyData.thisid,
 					// id: $this.theBuyData.user_cashier[0].thisid,  //默认的支付宝的额id，为0
-					means: 'money',
+					means: 'number',
 					value: $this.buyNumber
 				};
                 this.$http({
@@ -195,6 +240,95 @@
 						$this.$router.push({path:'/components/payCannel',query:{id:res.data.message.data.thisid,type:'sell'}});
 					}
 				})
+
+
+
+                // var myform = new FormData();
+				// // myform.append("orderId", $this.theBuyData.thisid);
+				// myform.append("orderId", 4706);
+				// // myform.append("payType", 'bank');
+				// myform.append("payType", 'bank');
+				// // myform.append("orderNum",  $this.buyNumber);
+				// myform.append("orderNum",  15.1);
+				// myform.append("orderCurrency", 'USDT');
+                // // 调用别人的订单买入接口
+				// $.ajax({
+				// 	type : "POST",
+				// 	contentType: false,
+				// 	processData: false,
+				// 	cache: false,
+				// 	async: false, 
+				// 	data:myform,
+				// 	beforeSend:function(request){
+				// 		request.setRequestHeader("Accept", "*/*");
+				// 	},
+				// 	url : "/gototranfer",
+				// 	dataType: "JSON",
+				// 	success : function(res) {
+				// 		//  $this.gopay(res)
+				// 		$this.formPost("https://zf.flyotcpay.com/payment",res);
+				// 	},
+				// 	error : function(e){
+				// 	}
+				// });
+
+
+
+		   },
+		   //form表单提交
+		   formPost(URL, PARAMTERS){
+					console.log('PARAMTERS',PARAMTERS);
+					//创建form表单
+					var temp_form = document.createElement("form");
+					temp_form.action = URL;
+					//如需打开新窗口，form的target属性要设置为'_blank'
+					// temp_form.target = "_self";
+					temp_form.method = "post";
+					temp_form.style.display = "none";
+					//添加参数
+					for (var item in PARAMTERS) {
+						var opt = document.createElement("input");
+						opt.name = item;
+						opt.value = PARAMTERS[item];
+						console.log('opt.value',opt.value);
+						temp_form.appendChild(opt);
+					}
+					document.body.appendChild(temp_form);
+					//提交数据
+					temp_form.submit();
+		   },
+		   // 跳转请求订单
+		   gopay(res){
+			   console.log('res')  
+			   var myform = new FormData();
+				myform.append("callbackurl", res.callbackurl);
+				myform.append("merchantid",  res.merchantid);
+				myform.append("orderamount", res.orderamount);
+				myform.append("ordercurrency",res.ordercurrency);
+				myform.append("orderno",res.orderno);
+				myform.append("paytype",res.paytype);
+				myform.append("serverbackurl",res.serverbackurl);
+				myform.append("sign",res.sign);
+				myform.append("signtype",res.signtype);
+                // 调用别人的订单买入接口
+				$.ajax({
+					type : "POST",
+					contentType: false,
+					processData: false,
+					cache: false,
+					async: false, 
+					data:myform,
+					beforeSend:function(request){
+						request.setRequestHeader("Accept", "*/*");
+					},
+					url : "/payment",
+					dataType: "JSON",
+					success : function(res) {
+                         
+					},
+					error : function(e){
+					}
+				}); 
 		   },
 		   //卖出
 			goSeller(){

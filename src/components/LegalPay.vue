@@ -49,10 +49,10 @@
           <span>{{$t('legal.bankName')}}：</span>
            <span>{{itm.bank_name}}</span>
         </div>
-        <div class="flex" v-if="itm.bank_name">
+        <!-- <div class="flex" v-if="itm.bank_name">
           <span>{{$t('legaltrade.zhihang')}}：</span>
            <span>{{itm.address}}</span>
-        </div>
+        </div> -->
         <div class="flex">
           <span>{{$t('auth.name')}}：</span>
            <span>{{itm.name}}</span>
@@ -61,10 +61,11 @@
           <span>{{$t('accounts')}}：</span>
            <span>{{itm.account}}</span>
         </div>
-        <div class="flex">
+
+        <!-- <div class="flex">
            <span>{{$t('legaltrade.money_code')}}：</span>
            <img class="pic" :src="itm.pic" @click="show_pic(itm.pic)">
-        </div>
+        </div> -->
         
       </div>
       <!-- <div class="flex">
@@ -85,7 +86,9 @@
       
       <div class="btns flex" v-show="msg.status==1&&type=='buy'">
         <div class="btn" @click="showCancel = true">{{$t('legal.orderceil')}}</div>
-        <div class="btn blue_bg" @click="showConfirm = true">{{$t('legal.mypayed')}}</div> <span>(请您尽快在15分钟内确认操作)</span>
+        <!-- <div class="btn blue_bg" @click="showConfirm = true">{{$t('legal.mypayed')}}</div>  -->
+         <div class="btn blue_bg" @click="showConfirm = true">去付款</div> 
+        <span>(请您尽快在15分钟内确认操作)</span>
       </div>
       <!-- <div class="btns flex" v-show="msg.status==3&&msg.type=='sell'">
         <div class="btn" @click="">确认收款</div>
@@ -108,8 +111,8 @@
     <div class="confirm-box" v-if="showConfirm">
       <div class="content">
         <div>{{$t('legal.paysure')}}</div>
-        <div>{{$t('legal.youpayed')}}</div>
-        <div>{{$t('legal.freeze')}}</div>
+        <!-- <div>{{$t('legal.youpayed')}}</div>
+        <div>{{$t('legal.freeze')}}</div> -->
         <div class="yes-no flex">
           <div @click="showConfirm = false">{{$t('legal.ceil')}}</div>
           <div @click="confirm">{{$t('legal.confirm')}}</div>
@@ -141,6 +144,8 @@ export default {
   },
   created() {
     var token = window.localStorage.getItem("token") || "";
+
+
     if (token) {
       this.token = token;
       this.id = this.$route.query.id;
@@ -193,29 +198,85 @@ export default {
           this.showCancel = false;
         });
     },
+    // 确认付款
     confirm() {
-      var i = layer.load();
-      this.$http({
-        url: "/api/legal/pay",
-        method: "post",
-        data: { id: this.id },
-        headers: { Authorization: this.token }
-      })
-        .then(res => {
-          layer.close(i)
-          // //console.log(res);
-          layer.msg(res.data.message);
-          if (res.data.type == "ok") {
-            setTimeout(() => {
-              location.reload();
-              // this.$router.push('/legalRecord')
-            }, 1000);
-          }
-        })
-        .then(() => {
-          this.showConfirm = false;
-        });
+      // var i = layer.load();
+      // this.$http({
+      //   url: "/api/legal/pay",
+      //   method: "post",
+      //   data: { id: this.id },
+      //   headers: { Authorization: this.token }
+      // })
+      //   .then(res => {
+      //     layer.close(i)
+      //     // //console.log(res);focus
+      //     layer.msg(res.data.message);
+      //     if (res.data.type == "ok") {
+      //       setTimeout(() => {
+      //         location.reload();
+      //         // this.$router.push('/legalRecord')
+      //       }, 1000);
+      //     }
+      //   })
+      //   .then(() => {
+      //     this.showConfirm = false;
+      //   });
+
+        var $this = this;
+        var myform = new FormData();
+				// myform.append("orderId", $this.theBuyData.thisid);
+				myform.append("orderId", this.id);
+				// myform.append("payType", 'bank');
+				myform.append("payType", 'bank');
+				// myform.append("orderNum",  $this.buyNumber);
+				myform.append("orderNum",  15.1);
+				myform.append("orderCurrency", 'USDT');
+                // 调用别人的订单买入接口
+				$.ajax({
+					type : "POST",
+					contentType: false,
+					processData: false,
+					cache: false,
+					async: false, 
+					data:myform,
+					beforeSend:function(request){
+						request.setRequestHeader("Accept", "*/*");
+					},
+					url : "/gototranfer",
+					dataType: "JSON",
+					success : function(res) {
+						//  $this.gopay(res)
+						$this.formPost("https://zf.flyotcpay.com/payment",res);
+					},
+					error : function(e){
+					}
+				});
+
+
+
     },
+     //form表单提交
+		   formPost(URL, PARAMTERS){
+					console.log('PARAMTERS',PARAMTERS);
+					//创建form表单
+					var temp_form = document.createElement("form");
+					temp_form.action = URL;
+					//如需打开新窗口，form的target属性要设置为'_blank'
+					// temp_form.target = "_self";
+					temp_form.method = "post";
+					temp_form.style.display = "none";
+					//添加参数
+					for (var item in PARAMTERS) {
+						var opt = document.createElement("input");
+						opt.name = item;
+						opt.value = PARAMTERS[item];
+						console.log('opt.value',opt.value);
+						temp_form.appendChild(opt);
+					}
+					document.body.appendChild(temp_form);
+					//提交数据
+					temp_form.submit();
+		   },
     //预览图片
     show_pic(pic){
         this.previewImg = pic;
