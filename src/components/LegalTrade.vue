@@ -35,7 +35,9 @@
 						 <small v-if="theBuyData!='none'">{{theBuyData.merchant_name}}</small>  
 						 <small v-else>暂无买家信息</small> 
 					</p>
+                    
 					 <button style="width: 100%;background-color: red;padding: 6px;color: #fff;" @click="goBuy">立即买入</button>
+					 <p style="padding: 6px 0;font-size:10px">买入量提示:周一到周五早上九点到下午五点 限额是20万人民币和等值的usdt</p>
 				   </div>
 
 				   <!-- 卖出USDT -->

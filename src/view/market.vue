@@ -81,6 +81,17 @@
 						  @click="addDelete('user_add',itm.thisid)"></span>-->
 				</p>
 			</li>
+			<!-- <li data-v-8f3f06c6="" @click="changeKxian">
+				<p data-v-8f3f06c6="" data-index="0" class="bg-hov">
+					<span data-v-8f3f06c6="" class="w36">
+						<img data-v-8f3f06c6="" alt="" class="hide"><i data-v-8f3f06c6="">
+						<span data-v-8f3f06c6="" class="  el-icon-star-off star"></span>
+						<em data-v-8f3f06c6="" class="deep_blue bold blue_clr" style="margin-left: 10px;">ETC</em></i>
+					</span> 
+					<span data-v-8f3f06c6="" data-name="2/1" class="w30 tr deep_blue bold nowPrice blue_clr">6.65</span> 
+					<span data-v-8f3f06c6="" class="bold red">-0.12%</span>
+				</p>
+		    </li> -->
 		</ul>
 	</div>
 </template>
@@ -126,6 +137,10 @@
 			var that = this;
 		},
 		methods: {
+			// 切换k线
+			changeKxian(){
+
+			},
 			search(name) {
 				var l = this.keyword.length;
 				if (l) {
@@ -220,7 +235,24 @@
 						for (var i = 0; i < msg.length; i++) {
 							arr_quota[i] = msg[i].array;
 						}
+
+						// arr_quota[0].push({
+                        //     change: "2.98",
+						// 	currency_id: 8,
+						// 	currency_name: "ETC",
+						// 	high_price: "73.09",
+						// 	legal_id: 1,
+						// 	legal_name: "USDT",
+						// 	low_price: "67.92",
+						// 	now_cny_price: "504.49",
+						// 	now_price: "6.55",
+						// 	now_usdt_price: "71.56",
+						// 	number: "198220.4060",
+						// 	thisid: 37,
+						// 	volume: "198220.40",
+						// });
 						this.marketList = arr_quota;
+
 						// this.$store.state.priceScale = Math.pow(
 						//   10,
 						//   this.marketList[0][0].now_price
@@ -497,9 +529,9 @@
 				//向exchange组件传最新价
 				eventBus.$emit("toexchangeNowprice", sco_price);
 				//向兄弟组件传数据
-				eventBus.$emit("toTrade", leverTradeDatas);
+				eventBus.$emit("toTrade", leverTradeDatas);   //传递k线的
 				eventBus.$emit("toExchange", leverTradeDatas);
-				eventBus.$emit('currency_name', currency_name)
+				eventBus.$emit('currency_name', currency_name) //传递k线的
 				// 存本地
 				window.localStorage.setItem("tradeData", JSON.stringify(leverTradeDatas));
 			}
