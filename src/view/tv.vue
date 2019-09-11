@@ -1,41 +1,76 @@
 <template>
-  <div class="k-line-area bg-1d1d29">
-    <div class="flex ft12 top_bg">
-      <span class="ft16 bold flex alcenter c_symbol" style="color: #D2D6EC !important;">{{$store.state.symbol}}</span>
-      <span class="flex column alcenter center">
-        <span class="bold ft16" :style="{color:parseFloat(change)>0?'#41B37D':'#D74E5A'}">{{close}}</span>
-        <span class="gray_color bold">≈{{now_cny_price}} CNY</span>
-      </span>
-      <span class="flex column alcenter">
-        <span class="gray_color">{{$t('market.change')}}</span>
-        <span
-          class="bold"
-          :style="{color:parseFloat(change)>0?'#41B37D':'#D74E5A'}"
-        >{{(change-0).toFixed(2)}}%</span>
-      </span>
-      <span class="flex column alcenter">
-        <span class="gray_color">{{$t('home.high')}}</span>
-        <span class="bold_gray bold">{{(high-0).toFixed(6)}}</span>
-      </span>
-      <span class="flex column alcenter">
-        <span class="gray_color">{{$t('home.min')}}</span>
-        <span class="bold_gray bold">{{(low-0).toFixed(6)}}</span>
-      </span>
-      <span class="flex column alcenter">
-        <span class="gray_color">24h{{$t('home.volume')}}</span>
-        <span class="bold_gray bold">{{(volume-0).toFixed(2)}} {{currencyName}}</span>
-      </span>
-      <div class="theme flex">
-          <img src="../assets/images/dark.png"  @click="$changeTheme('dark')" alt="">
-          <img src="../assets/images/light.png" @click="$changeTheme('light')" alt="">      
+  <div>
+    <!-- <div class="k-line-area bg-1d1d29" v-if="!showetckey"> -->
+    <div class="k-line-area bg-1d1d29">
+       <div class="flex ft12 top_bg">
+        <span class="ft16 bold flex alcenter c_symbol" style="color: #D2D6EC !important;">{{$store.state.symbol}}</span>
+        <span class="flex column alcenter center">
+          <span class="bold ft16" :style="{color:parseFloat(change)>0?'#41B37D':'#D74E5A'}">{{close}}</span>
+          <span class="gray_color bold">≈{{now_cny_price}} CNY</span>
+        </span>
+        <span class="flex column alcenter">
+          <span class="gray_color">{{$t('market.change')}}</span>
+          <span
+            class="bold"
+            :style="{color:parseFloat(change)>0?'#41B37D':'#D74E5A'}"
+          >{{(change-0).toFixed(2)}}%</span>
+        </span>
+        <span class="flex column alcenter">
+          <span class="gray_color">{{$t('home.high')}}</span>
+          <span class="bold_gray bold">{{(high-0).toFixed(6)}}</span>
+        </span>
+        <span class="flex column alcenter">
+          <span class="gray_color">{{$t('home.min')}}</span>
+          <span class="bold_gray bold">{{(low-0).toFixed(6)}}</span>
+        </span>
+        <span class="flex column alcenter">
+          <span class="gray_color">24h{{$t('home.volume')}}</span>
+          <span class="bold_gray bold">{{(volume-0).toFixed(2)}} {{currencyName}}</span>
+        </span>
+        <div class="theme flex">
+            <img src="../assets/images/dark.png"  @click="$changeTheme('dark')" alt="">
+            <img src="../assets/images/light.png" @click="$changeTheme('light')" alt="">      
+        </div>
+      </div>
+      <div id="tv_chart_container" style="width:100%;height: 470px"></div>
+    </div>
+
+
+    <!-- <div v-else>
+      <div class="k-line-area bg-1d1d29">
+        <div class="flex ft12 top_bg">
+          <span class="ft16 bold flex alcenter c_symbol" style="color: rgb(210, 214, 236) !important;">ETC/USDT</span>
+           <span class="flex column alcenter center">
+             <span class="bold ft16" style="color: rgb(215, 78, 90);">6.66</span>
+             <span class="gray_color bold">≈58.0804 CNY</span>
+           </span>
+           <span class="flex column alcenter">
+             <span class="gray_color">涨幅</span>
+             <span class="bold" style="color: rgb(215, 78, 90);">-0.75%</span>
+           </span>
+           <span class="flex column alcenter"><span class="gray_color">最高价</span> 
+              <span class="bold_gray bold">6.550000</span>
+           </span>
+           <span class="flex column alcenter">
+              <span class="gray_color">最低价</span> <span class="bold_gray bold">6.375000</span>
+           </span> 
+              <span class="flex column alcenter"><span class="gray_color">24h交易量</span> 
+              <span class="bold_gray bold">6555.54 ETC</span>
+            </span>
+            <div class="theme flex"><img src="/static/img/dark.f42366b.png" alt=""> 
+                <img src="/static/img/light.ded03c1.png" alt="">
+            </div>
+        </div>
       </div>
     </div>
-    <div id="tv_chart_container" style="width:100%;height: 470px"></div>
+    <div id="tv_chart_container" style="width:100%;height: 470px"></div> -->
+    
   </div>
 </template>
 
 <script>
 // import Datafeeds from "../assets/js/datafeed.js";
+const etckxMin = require('../../data/etckxMin.json');
 
 export default {
   name: "tv",
@@ -63,7 +98,8 @@ export default {
       change: 0,
       nowPrice: 0,
       currencyName: "",
-      now_cny_price: "--" //最新价折合人民币
+      now_cny_price: "--", //最新价折合人民币
+      showetckey:false  //显示etc
     };
   },
   created() {
@@ -132,7 +168,12 @@ export default {
 
     eventBus.$on("currency_name", msg => {
       if (msg) {
-        that.currencyName = msg;
+        if(msg == 'ETC'){
+          this.showetckey = true
+        }else{
+          this.showetckey = false
+          that.currencyName = msg;
+        }
       }
     });
 
@@ -823,53 +864,74 @@ export default {
         if (resolution == "1D") {
           resolution = "1day";
         }
+        
+        // if(this_vue.currencyName == 'ETC'){
+        //    var msg = etckxMin.data;
+        //    console.log('etckxMinmsg',msg)
+        //     msg.forEach((item, i) => {
+        //       item.open = Number(item.open);
 
-        $.ajax({
-          // url:'http://ice.adminchao.com/api/deal/info?' +
-          url:
-            "/api/quotation/kline?" +
-            "from=" +
-            rangeStartDate +
-            "&to=" +
-            rangeEndDate +
-            // "&symbol=" +
-            // symbolInfo.name +
-            "&currency_id=" +
-            thethis.currencyId +
-            "&legal_id=" +
-            thethis.legalId +
-            "&period=" +
-            resolution +
-            "&page=0" +
-            "&limit=500",
-          type: "get",
-          success: res => {
-            if (res.type == "ok" && res.message && res.message.length > 0) {
-              var msg = res.message;
-              msg.forEach((item, i) => {
-                item.open = Number(item.open);
+        //       item.close = Number(item.close);
+        //       item.high = Number(item.high);
+        //       item.low = Number(item.low);
+        //       thethis.open = item.open;
+        //     });
+        //     onHistoryCallback(msg, { noData: false });
+        //     onHistoryCallback([], { noData: true });
+        // }
 
-                item.close = Number(item.close);
-                item.high = Number(item.high);
-                item.low = Number(item.low);
-                item.volume = Number(item.volume);
-                thethis.open = item.open;
-                // thethis.low = item.low;
-                // thethis.close = item.close;
-                // thethis.high = item.high;
-                // thethis.volume = item.volume;
-              });
-              onHistoryCallback(msg, { noData: false });
-              onHistoryCallback([], { noData: true });
-            }
-            if (!msg || res.code == "fail") {
-              onHistoryCallback([], { noData: true });
-            }
-            if (msg && msg.length == 0) {
-              onHistoryCallback([], { noData: true });
-            }
-          }
-        });
+            
+           $.ajax({
+              // url:'http://ice.adminchao.com/api/deal/info?' +
+              url:
+                "/api/quotation/kline?" +
+                "from=" +
+                rangeStartDate +
+                "&to=" +
+                rangeEndDate +
+                // "&symbol=" +
+                // symbolInfo.name +
+                "&currency_id=" +
+                thethis.currencyId +
+                "&legal_id=" +
+                thethis.legalId +
+                "&period=" +
+                resolution +
+                "&page=0" +
+                "&limit=500",
+              type: "get",
+              success: res => {
+                if (res.type == "ok" && res.message && res.message.length > 0) {
+                  console.log('noetckxMinmsg',res)
+                  var msg = res.message;
+                  msg.forEach((item, i) => {
+                    item.open = Number(item.open);
+
+                    item.close = Number(item.close);
+                    item.high = Number(item.high);
+                    item.low = Number(item.low);
+                    item.volume = Number(item.volume);
+                    thethis.open = item.open;
+                    // thethis.low = item.low;
+                    // thethis.close = item.close;
+                    // thethis.high = item.high;
+                    // thethis.volume = item.volume;
+                  });
+                  onHistoryCallback(msg, { noData: false });
+                  onHistoryCallback([], { noData: true });
+                }
+                if (!msg || res.code == "fail") {
+                  onHistoryCallback([], { noData: true });
+                }
+                if (msg && msg.length == 0) {
+                  onHistoryCallback([], { noData: true });
+                }
+              }
+            });
+
+
+            
+        
       };
       //实时数据
       Datafeed.Container.prototype.subscribeBars = function(

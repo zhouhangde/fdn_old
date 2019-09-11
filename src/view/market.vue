@@ -82,7 +82,7 @@
 				</p>
 			</li>
 			<!-- <li data-v-8f3f06c6="" @click="changeKxian">
-				<p data-v-8f3f06c6="" data-index="0" class="bg-hov">
+				<p data-v-8f3f06c6="" data-index="0"  :class="{'bg-hov':true,'bg-even':ids%2 !=0,'bg-sel':(ids===6)}">
 					<span data-v-8f3f06c6="" class="w36">
 						<img data-v-8f3f06c6="" alt="" class="hide"><i data-v-8f3f06c6="">
 						<span data-v-8f3f06c6="" class="  el-icon-star-off star"></span>
@@ -139,7 +139,8 @@
 		methods: {
 			// 切换k线
 			changeKxian(){
-
+				eventBus.$emit('currency_name', 'ETC'); //传递k线的
+				this.ids = 6;
 			},
 			search(name) {
 				var l = this.keyword.length;
@@ -240,13 +241,13 @@
                         //     change: "2.98",
 						// 	currency_id: 8,
 						// 	currency_name: "ETC",
-						// 	high_price: "73.09",
+						// 	high_price: "6.66",
 						// 	legal_id: 1,
 						// 	legal_name: "USDT",
-						// 	low_price: "67.92",
+						// 	low_price: "6.55",
 						// 	now_cny_price: "504.49",
 						// 	now_price: "6.55",
-						// 	now_usdt_price: "71.56",
+						// 	now_usdt_price: "6.56",
 						// 	number: "198220.4060",
 						// 	thisid: 37,
 						// 	volume: "198220.40",
